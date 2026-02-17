@@ -1,33 +1,21 @@
 from score_seqs import score_seqs
 
-
 def move_seq2(seq1, seq2):
-    """
-    >>> move_seq2("THEFASTCAT", "THEFATCAT")
-    ['THEFASTCAT---------', 'THEFATCAT----------', '-THEFATCAT---------', '--THEFATCAT--------', '---THEFATCAT-------', '----THEFATCAT------', '-----THEFATCAT-----', '------THEFATCAT----', '-------THEFATCAT---', '--------THEFATCAT--', '---------THEFATCAT-', '----------THEFATCAT']
-    >>> move_seq2("THEFASTCAT", "AFASTCAT")
-    ['THEFASTCAT--------', 'AFASTCAT----------', '-AFASTCAT---------', '--AFASTCAT--------', '---AFASTCAT-------', '----AFASTCAT------', '-----AFASTCAT-----', '------AFASTCAT----', '-------AFASTCAT---', '--------AFASTCAT--', '---------AFASTCAT-', '----------AFASTCAT']
-    >>> move_seq2("THEFASTCAT", "THECAT")
-    ['THEFASTCAT------', 'THECAT----------', '-THECAT---------', '--THECAT--------', '---THECAT-------', '----THECAT------', '-----THECAT-----', '------THECAT----', '-------THECAT---', '--------THECAT--', '---------THECAT-', '----------THECAT']
-    """
-    # YOUR CODE HERE
-
+    if len(seq2) > len(seq1):
+      seq1, seq2 = seq2, seq1
+    gaps = (len(seq1))* '-'
+    result = [seq1+gaps[:-2]]
+    for i in range(len(seq1)+1):
+      head = gaps[:i]
+      tail = gaps[i:]
+      filled_gap = head+seq2+tail
+      result.append(filled_gap)
+    return result
 
 def print_scores(seq1, seq2, match, mismatch, gap):
-    """
-    Score and print the alignments of two sequences with match, mismatch and gap.
-    >>> print_scores('THEFASTCAT', 'AFASTCAT', 1, -1, -2)
-    THEFASTCAT--------
-    AFASTCAT---------- -12
-    -AFASTCAT--------- -12
-    --AFASTCAT-------- 2
-    ---AFASTCAT------- -15
-    ----AFASTCAT------ -16
-    -----AFASTCAT----- -19
-    ------AFASTCAT---- -22
-    -------AFASTCAT--- -27
-    --------AFASTCAT-- -28
-    ---------AFASTCAT- -33
-    ----------AFASTCAT -36
-    """
-    # YOUR CODE HERE
+    options = move_seq2(seq1,seq2)
+    scores = list()
+    print(options[0])
+    for i in range(len(options)-1):
+      scores.append(score_seqs(options[0], options[i+1], match, mismatch, gap))
+      print(options[i+1], scores[i])
