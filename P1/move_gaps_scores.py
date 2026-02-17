@@ -26,4 +26,13 @@ def move_gaps_scores(seq1, seq2, match, mismatch, gap):
     AFASTCA--T -10
     AFASTCAT-- -12
     """
-    # YOUR CODE HERE
+    options = move_gaps(seq1,seq2)
+    scores = list()
+    print(options[0])
+    for i in range(len(options)-2):
+      scores.append(score_seqs(options[0], options[i+1], match, mismatch, gap))
+      print(options[i+1], scores[i])
+
+move_gaps_scores('AFASTCAT', 'THEFASTCAT', 1, -1, -2)
+print()
+move_gaps_scores('AFASTCAT', 'THEFASTCAT', 1, -1, -2)
