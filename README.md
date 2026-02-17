@@ -1,6 +1,6 @@
 # Algorithms in Biology AB
 
-Practical 1:   
+## Practical 1:   
   
   Compare sequences
   - seq_identity
