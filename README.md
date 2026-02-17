@@ -1,4 +1,4 @@
-# Algorithms in Biology AB
+# Algorithms in Biology (BBI-AB) 2025-26
 
 ## Practical 1:   
   
