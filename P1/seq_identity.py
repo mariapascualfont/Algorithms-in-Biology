@@ -1,6 +1,6 @@
 def seq_identity(seq1, seq2):
     if len(seq1) != len(seq2):
-      print() 
+      return None
     else:
       count = 0
       total = len(seq1)
