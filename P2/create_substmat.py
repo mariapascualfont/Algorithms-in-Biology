@@ -3,7 +3,7 @@ def create_substmat(filename):
   sequences = []
   for line in f.readlines():
         if not line.startswith('>'):
-          line.strip()
+          line = line.strip()
           sequences.append(line)
 
   count = 0
