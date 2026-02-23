@@ -7,10 +7,12 @@ def create_substmat(filename):
           sequences.append(line)
 
   count = 0
+  total_alignments = 0
   alignments = {}
   for i in range(0,len(sequences) - 1):
-    for j in range(1+count, len(sequences)):
 
+    for j in range(1+count, len(sequences)):
+      total_alignments += len(sequences[0]) 
       pairs = zip(sequences[i], sequences[j])
       
       for pair in pairs:
@@ -19,8 +21,13 @@ def create_substmat(filename):
         elif pair not in alignments:
           alignments[pair] = 0
         alignments[pair] += 1
-        
+    
     count += 1
+
+  observed_frequencies = alignments.copy()
+  
+  for i in observed_frequencies:
+    observed_frequencies[i] = observed_frequencies[i]/total_alignments
 
 
 return matrix
