@@ -23,30 +23,79 @@ def create_substmat(filename):
         alignments[pair] += 1
     
     count += 1
-
+  
   observed_frequencies = alignments.copy()
   
   for i in observed_frequencies:
     observed_frequencies[i] = observed_frequencies[i]/total_alignments
 
-  expected_frequencies = {}
+  
+  expected_frequencies_elems = {}
   total_elems = 0
 
   for i in sequences:
     for j in i:
       total_elems += 1
-      if j not in expected_frequencies:
-        expected_frequencies[j] = 0
-      expected_frequencies[j] += 1
+      if j not in expected_frequencies_elems:
+        expected_frequencies_elems[j] = 0
+      expected_frequencies_elems[j] += 1
 
-  for i in expected_frequencies:
-    expected_frequencies[i] = expected_frequencies[i]/total_elems    
+  for i in expected_frequencies_elems:
+    expected_frequencies_elems[i] = expected_frequencies_elems[i]/total_elems
+
+
+  expected_frequencies = alignments.copy()
+
+  for pair in expected_frequencies:
+    a,b = pair
+    if a == b:
+      expected = expected_frequencies_elems[a] ** 2
+    else:
+      expected = 2 * expected_frequencies_elems[a] * expected_frequencies_elems[b]
+
+    expected_frequencies[pair] = expected
   
-
   log_odds_ratio = alignments.copy()
 
   for i in log_odds_ratio:
-    log_odds_ratio[i] = int((math.log(observed_frequencies[i]/(expected_frequencies[i[0]] *expected_frequencies[i[1]])))*10)
+    ratio = observed_frequencies[i] / expected_frequencies[i]
+    log_val = math.log10(ratio)
+    print(i, log)
+    log_odds_ratio[i] = round(log_val * 10)
+  
 
   return log_odds_ratio
 
+
+def print_substmat(log_odds_ratio):
+    # Get unique symbols from the pairs
+    symbols = set()
+    for a, b in log_odds_ratio.keys():
+        symbols.add(a)
+        symbols.add(b)
+
+    symbols = sorted(symbols)
+
+    # Print header
+    print("    ", end="")
+    for s in symbols:
+        print(f"{s:>5}", end="")
+    print()
+
+    # Print lower triangle matrix
+    for i, s1 in enumerate(symbols):
+        print(f"{s1:>4}", end="")
+        for j, s2 in enumerate(symbols):
+            if j > i:
+                break
+            pair = (s1, s2)
+            if pair not in log_odds_ratio:
+                pair = (s2, s1)
+
+            value = log_odds_ratio.get(pair, 0)
+            print(f"{value:>5}", end="")
+        print()
+  
+
+a = 'ok'
+print_substmat(create_substmat(a))
