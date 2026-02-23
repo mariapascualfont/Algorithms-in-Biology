@@ -10,14 +10,17 @@ def create_substmat(filename):
   alignments = {}
   for i in range(0,len(sequences) - 1):
     for j in range(1+count, len(sequences)):
-      print(i,j)
 
       pairs = zip(sequences[i], sequences[j])
       
       for pair in pairs:
-        if pair not in alignments:
+        if pair[::-1] in alignments:
+          pair = pair[::-1]
+        elif pair not in alignments:
           alignments[pair] = 0
         alignments[pair] += 1
+        
     count += 1
-  return sequences
 
+
+return matrix
