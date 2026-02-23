@@ -29,7 +29,7 @@ def create_substmat(filename):
   for i in observed_frequencies:
     observed_frequencies[i] = observed_frequencies[i]/total_alignments
 
-expected_frequencies = {}
+  expected_frequencies = {}
   total_elems = 0
 
   for i in sequences:
