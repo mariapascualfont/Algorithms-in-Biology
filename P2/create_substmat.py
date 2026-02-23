@@ -29,5 +29,24 @@ def create_substmat(filename):
   for i in observed_frequencies:
     observed_frequencies[i] = observed_frequencies[i]/total_alignments
 
+expected_frequencies = {}
+  total_elems = 0
 
-return matrix
+  for i in sequences:
+    for j in i:
+      total_elems += 1
+      if j not in expected_frequencies:
+        expected_frequencies[j] = 0
+      expected_frequencies[j] += 1
+
+  for i in expected_frequencies:
+    expected_frequencies[i] = expected_frequencies[i]/total_elems    
+  
+
+  log_odds_ratio = alignments.copy()
+
+  for i in log_odds_ratio:
+    log_odds_ratio[i] = int((math.log(observed_frequencies[i]/(expected_frequencies[i[0]] *expected_frequencies[i[1]])))*10)
+
+  return log_odds_ratio
+
