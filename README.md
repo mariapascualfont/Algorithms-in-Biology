@@ -11,3 +11,8 @@
       
 Convert alignment
   - convert_alignment
+
+## Practical 2:   
+  
+  - read_substmat_full
+  - create_substmat
