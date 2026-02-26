@@ -17,7 +17,7 @@ def read_substmat_full(filename):
         l = line.split()
         count = 1
         for i in d:
-            d[i][l[0]] = l[count]
+            d[i][l[0]] = int(l[count])
             count+=1
 
     return d
