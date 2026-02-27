@@ -1,3 +1,4 @@
+from nw import nw
 def nw_alt1(seq_i, seq_j, match, mismatch, gap):
 
     match, mismatch, gap = int(match), int(mismatch), int(gap)
