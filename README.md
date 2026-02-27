@@ -16,3 +16,9 @@ Convert alignment
   
   - read_substmat_full
   - create_substmat
+
+
+## Practical 3:   
+  
+  - Needleman - Wunsch algorithm (nw.py)
+  - Smith - Waterman algorithm
