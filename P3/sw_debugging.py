@@ -61,7 +61,6 @@ def sw(seq_i, seq_j, match, mismatch, gap):
     max_i = 0
     max_j= 0
     for i in range(len(scores)) :
-      print(scores[i])
       if max(scores[i]) > maximum:
         maximum = max(scores[i])
         max_i = i
